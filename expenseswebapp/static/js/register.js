@@ -11,6 +11,8 @@ const emailSuccessOutput = document.querySelector('.emailSuccessOutput');
 const showPasswordToggle = document.querySelector('.showPasswordToggle');
 const passwordField = document.querySelector('#passwordField');
 
+const submitBtn = document.querySelector('.submitBtn'); //Getting the submit button to disable it when an error occurs
+
 usernameField.addEventListener('keyup', (e) => {
 	const usernameVal = e.target.value;
 	
@@ -30,6 +32,8 @@ usernameField.addEventListener('keyup', (e) => {
 		.then((data) =>{
 			//console.log('data ', data);
 			if(data.username_error){ //If returned a user_name error
+				submitBtn.disabled = true;
+
 				usernameSuccessOutput.style.display = 'none'; // When an error appears, hide the sucess output message
 
 				usernameField.classList.remove('is-valid');
@@ -39,6 +43,10 @@ usernameField.addEventListener('keyup', (e) => {
 
 			} 
 			else{ // If theres no error, show that is valid
+				if(!emailField.classList.contains('is-invalid')){ //IF the email field is invalid do not remove atribute
+					submitBtn.removeAttribute("disabled");
+				}
+
 				usernameField.classList.remove('is-invalid');
 				usernameField.classList.add('is-valid');
 
@@ -81,6 +89,8 @@ emailField.addEventListener('keyup', (e) => {
 		.then((data) => {
 			
 			if(data.email_error){ //If returned a email error
+				submitBtn.disabled = true;
+
 				emailSuccessOutput.style.display = 'none'; // When an error appears, hide the sucess output message
 
 				emailField.classList.remove('is-valid');
@@ -90,6 +100,11 @@ emailField.addEventListener('keyup', (e) => {
 				emailFeedbackArea.innerHTML = `<p>${data.email_error}</p>`; //Show error message
 			}
 			else{ // If theres no error, show thats valid
+				if(!usernameField.classList.contains('is-invalid')){ //IF the username field is invalid do not remove atribute
+					submitBtn.removeAttribute("disabled");
+				}
+				
+
 				emailField.classList.remove('is-invalid');
 				emailField.classList.add('is-valid'); //Adding bootstrap class 'valid'
 

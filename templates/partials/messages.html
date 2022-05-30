@@ -1,0 +1,12 @@
+<!-- MESSAGES TAGS: DEBUG, INFO, SUCCESS, ERROR, WARNING -->
+
+
+{% if messages %}
+	<div class="messages">
+		{% for message in messages %}
+		<!-- Using bootstrap alert classes, so we can have alert-info alert-sucess alert-error and alert-warning -->
+			
+			<div{% if message.tags %} class="alert alert-sm alert-{{ message.tags }}"{% endif %}>{{ message }}</div>
+		{% endfor %}
+	</div>
+{% endif %}

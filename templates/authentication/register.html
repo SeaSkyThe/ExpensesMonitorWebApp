@@ -12,9 +12,15 @@
 				<div class="card-title py-3">
 					<h4>Register your account</h4>
 				</div>
-				<form action="" method="post">
+
+				
+
+				<form action="{% url 'register' %}" method="post">
+					{% csrf_token %}
+
+					{% include 'partials/messages.html' %}
 					<div class="form-group mb-3">
-						<input type="text" placeholder="Username" name="username" id="usernameField" class="form-control form-control-sm">
+						<input type="text" placeholder="Username" name="username" id="usernameField" class="form-control form-control-sm" value="{{fieldValues.username}}">
 					</div>
 					<!-- Error message of invalid username, do not display naturally -->
 					<div class="usernameFeedbackArea invalid-feedback" style="display:none"></div>
@@ -23,7 +29,7 @@
 						
 					
 					<div class="form-group mb-3">
-						<input type="email" placeholder="user@email.com" name="email" id="emailField" class="form-control form-control-sm">
+						<input type="email" placeholder="user@email.com" name="email" id="emailField" class="form-control form-control-sm" value="{{fieldValues.email}}">
 					</div>
 					<!-- Error message of invalid email, do not display naturally -->
 					<div class="emailFeedbackArea invalid-feedback" style="display:none"></div>
@@ -34,7 +40,7 @@
 						<input type="password" placeholder="Password" name="password" id="passwordField" class="form-control form-control-sm">
 						<small class="float-end py-3 showPasswordToggle">SHOW</small>
 					</div>
-					<input type="submit" value="Register" class="btn btn-primary col-12" />
+					<input type="submit" value="Register" class="btn btn-primary col-12 submitBtn" />
 				</form>	
 
 			</div>
