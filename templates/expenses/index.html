@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 
+
 {% block content %}
 
+<div class="container">
+    {% include 'partials/messages.html' %}
     <h1>Expense list</h1>
 
     <ul>
@@ -18,5 +21,9 @@
         <li>Bought Chocolate</li>
 
     </ul>
+
+
+</div>
+
 
 {% endblock %}

@@ -1,10 +1,13 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views import View
 import json
 from django.http import JsonResponse
 from django.contrib.auth.models import User
+from django.contrib import auth
 from validate_email import validate_email
 from django.contrib import messages
+from django.core.mail import EmailMessage
+
 # Create your views here.
 
 # Validate the entered email
@@ -67,10 +70,60 @@ class RegistrationView(View):
 				#Create account
 				user = User.objects.create_user(username=username, email=email)
 				user.set_password(password)
+				# #Set active to false, and to be active, the user has to confirm his/her email.
+				# user.is_active = False
+				
+				#Saves the user in Database
 				user.save()
+
+				# #Send confirmation mail to the user
+				# subject = 'Expenses App Account Confirmation Email'
+				# body = ''
+				# from_email = 'noreply@sst.com'
+
+				# email_message = EmailMessage(
+				#     subject=subject,
+				#     body=body,
+				#     from_email=from_email,
+				#     [email]
+				# )
 
 				messages.success(request, 'The registration was a sucess!')
 				return render(request, 'authentication/register.html')
 
 
 		return render(request, 'authentication/register.html')
+
+
+class LoginView(View):
+	def get(self, request):
+		return render(request, 'authentication/login.html')
+
+	def post(self, request):
+		username = request.POST['username']
+		password = request.POST['password']
+
+		if(username and password):
+			user = auth.authenticate(username=username, password=password)
+
+			if(user):
+				if(user.is_active):
+					auth.login(request, user)
+					messages.success(request, f'Welcome, {user.username} you are now logged in')
+					return redirect('expenses')
+
+				messages.error(request, f'This account is not active, please check your email or talk with an admin.')
+				return render(request, 'authentication/login.html')
+
+			messages.error(request, f'Invalid credentials, please try again')
+			return render(request, 'authentication/login.html')
+		
+		messages.error(request, f'Please fill all fields')
+		return render(request, 'authentication/login.html')
+
+
+class LogoutView(View):
+	def post(self, request):
+		auth.logout(request)
+		messages.success(request, 'You have been logged out')
+		return redirect('login')
