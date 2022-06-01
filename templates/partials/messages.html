@@ -1,6 +1,6 @@
 <!-- MESSAGES TAGS: DEBUG, INFO, SUCCESS, ERROR, WARNING -->
-
-
+{% load static %}
+<link href="{% static 'css/main.css' %}" rel="stylesheet">
 {% if messages %}
 	<div class="messages">
 		{% for message in messages %}
@@ -10,3 +10,6 @@
 		{% endfor %}
 	</div>
 {% endif %}
+
+
+<script src="{% static 'js/messages.js' %}"></script>
