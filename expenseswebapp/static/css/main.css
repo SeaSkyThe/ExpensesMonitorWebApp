@@ -66,6 +66,13 @@
   transform: scale(1.1);
 }
 
+.breadcrumb{
+  background-color: lightgray;
+  padding: 1%;
+}
+.breadcrumb-item{
+  padding-left: 1%;
+}
 
 /* Messages fade out
 .messages {
@@ -75,3 +82,5 @@
   0% {opacity:1;}
   100% {opacity:0;}  
 } */
+
+

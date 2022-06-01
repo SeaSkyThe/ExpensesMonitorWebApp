@@ -5,3 +5,4 @@ Features:
  - PostgreSQL Database
  - Account Registration (with Username and Email)
  - Message Alert System (made with Django Messages Framework)
+ - CRUD (Create, Read, Update, Delete) operations for Expenses

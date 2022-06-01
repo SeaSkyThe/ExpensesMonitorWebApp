@@ -1,29 +1,58 @@
 {% extends 'base.html' %}
-
+{% load static %}
 
 {% block content %}
+<head>
+    <link href="{% static 'css/main.css' %}" rel="stylesheet">
+</head>
 
-<div class="container">
-    {% include 'partials/messages.html' %}
-    <h1>Expense list</h1>
 
-    <ul>
-
-        <li>Bought Chocolate</li>
-        <li>Bought Chocolate</li>
-        <li>Bought Chocolate</li>
-        <li>Bought Chocolate</li>
-        <li>Bought Chocolate</li>
-        <li>Bought Chocolate</li>
-        <li>Bought Chocolate</li>
-        <li>Bought Chocolate</li>
-        <li>Bought Chocolate</li>
-        <li>Bought Chocolate</li>
-
-    </ul>
-
+<div class="container mt-4">
+   <div class="row">
+       <div class="col-md-10">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href= "">Expenses</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">My Expenses</li>
+                </ol>
+            </nav>
+       </div>
+       <div class="col-md-2">
+            <a class="btn btn-primary btn-sm float-end" href= {% url 'add_expense' %}>Add Expense</a>
+       </div>
+   </div>
+        
+    <div class="container">
+        {% include 'partials/messages.html' %}
+        <table class="table table-stripped table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Price (CURRENCY)</th>
+                    <th scope="col">Category</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Date</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for expense in expenses %}
+                    <tr>
+                        <td scope="row">{{  forloop.counter }}</td>
+                        <td>{{expense.price}}</td>
+                        <td>{{expense.category}}</td>
+                        <td>{{expense.description}}</td>
+                        <td>{{expense.date}}</td>
+                       
+                    </tr>
+                {% endfor %}
+                
+            </tbody>
+        </table>
+    </div>
 
 </div>
 
 
-{% endblock %}
+
+{% endblock content %}
