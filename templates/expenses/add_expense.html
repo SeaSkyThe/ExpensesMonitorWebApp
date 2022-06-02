@@ -32,7 +32,7 @@
 						<label class="form-label">Category</label>
 						<select name="category" class="form-select form-control form-control-sm" >
 							{% for category in categories %}
-								<option name={{ category }} value={{ category }}>{{ category }}</option>
+								<option name="{{ category }}" value="{{ category }}">{{ category }}</option>
 							{% endfor %}
 							
 						</select>
@@ -40,7 +40,7 @@
 
 					<div class="form-group mb-3">
 						<label class="form-label">Spending date</label>
-						<input type="date" class="form-control form-control-sm" name="spending_date">
+						<input type="date" class="form-control form-control-sm" name="spending_date" value="{{ values.date }}">
 					</div>
 					<input type="submit" value="add_expense" class="btn btn-primary float-end">
 				</form>

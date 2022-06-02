@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+	
+<div class="container mt-4">
+	
+
+	<div class="row">
+        <div class="col-md-10">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href= {% url 'expenses' %}>Expenses</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit Expense</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-md-2">
+            <a href={% url 'delete_expense' values.id %} class="btn btn-danger btn-sm">Delete</a>
+
+        </div>
+
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <form action={% url 'edit_expense' values.id %} method="post">
+                {% csrf_token %}
+                {% include 'partials/messages.html' %}
+                <div class="form-group mb-3">
+                    <label class="form-label">Price</label>
+                    <input type="number" min="0" step=".01" class="form-control form-control-sm" name="price" value="{{ values.price }}">
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Description</label>
+                    <input type="text" class="form-control form-control-sm" name="description" value="{{ values.description }}">
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Category</label>
+                    <select name="category" class="form-select form-control form-control-sm" >
+                        <option selected name="{{ values.category }}" value="{{ values.category }}">{{ values.category }}</option>
+                        {% for category in categories %}
+                            {% if category.name != values.category %}
+                                <option name="{{ category.name }}" value="{{ category.name }}">{{ category.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                        
+                    </select>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Spending date</label>
+                    <input type="date" class="form-control form-control-sm" name="spending_date" value="{{ values.date }}">
+                </div>
+                <input type="submit" value="update_expense" class="btn btn-primary float-end">
+            </form>
+        </div>
+    </div>
+	
+
+</div>
+
+{% endblock %}
