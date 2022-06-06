@@ -52,7 +52,7 @@
 
                 <div class="form-group mb-3">
                     <label class="form-label">Spending date</label>
-                    <input type="date" class="form-control form-control-sm" name="spending_date" value="{{ values.date }}">
+                    <input type="date" class="form-control form-control-sm" name="spending_date" value="{{ values.date |date:'Y-m-d' }}">
                 </div>
                 <input type="submit" value="update_expense" class="btn btn-primary float-end">
             </form>

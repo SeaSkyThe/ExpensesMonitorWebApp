@@ -24,35 +24,90 @@
         
     <div class="container">
         {% include 'partials/messages.html' %}
-        <table class="table table-stripped table-hover">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Price (CURRENCY)</th>
-                    <th scope="col">Category</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Date</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for expense in expenses %}
+
+        <div class="row">
+            <div class="col-md-8"></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <input type="text" class="form-control" id="searchField" placeholder='Search'>
+                </div>
+            </div>
+        </div>
+        <div class="original-table">
+            <table class="table table-stripped table-hover">
+                <thead>
                     <tr>
-                        <td scope="row">{{  forloop.counter }}</td>
-                        <td>{{expense.price}}</td>
-                        <td>{{expense.category}}</td>
-                        <td>{{expense.description}}</td>
-                        <td>{{expense.date}}</td>
-                        <td><a href={% url 'edit_expense' expense.id %} class="btn btn-primary btn-sm">edit</a></td>
+                        <th scope="col">#</th>
+                        <th scope="col">Price ({{ currency }})</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Date</th>
+                        <th scope="col"></th>
                     </tr>
-                {% endfor %}
-                
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for expense in page_object %}
+                        <tr>
+                            <td scope="row">{{  forloop.counter }}</td>
+                            <td>{{expense.price}}</td>
+                            <td>{{expense.category}}</td>
+                            <td>{{expense.description}}</td>
+                            <td>{{expense.date}}</td>
+                            <td><a href={% url 'edit_expense' expense.id %} class="btn btn-primary btn-sm">edit</a></td>
+                        </tr>
+                    {% endfor %}
+                    
+                </tbody>
+            </table>
+
+        </div>
+        
+
+        {% comment %} SEARCH TABLE {% endcomment %}
+        <p class='no-results'>No results found</p>
+        <div class="table-output">
+            <table class="table table-stripped table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Price ({{ currency }})</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Date</th>
+                        <th scope="col"></th>
+                    </tr>
+                </thead>
+                <tbody class='table-output-body'>
+                   
+                    
+                </tbody>
+            </table>
+        </div>
+
+
+
+
+        <div class="pagination-container">
+
+            <div class="">
+                Showing Page {{ page_object.number }} of {{ page_object.paginator.num_pages }}
+            </div>
+            <ul class="pagination align-right float-end mr-auto" >
+                {% if page_object.has_previous %}
+                    <li {% if page_object.number == 1 %} class="page-item active"{% endif %}> <a class="page-link" href="?page=1">&laquo; 1</a> </li>
+                    <li class="page-item"> <a class="page-link" href="?page={{ page_object.previous_page_number }}">Previous</a></li>
+                {% endif %}
+                {% if page_object.has_next %}
+                    <li class="page-item"> <a href="?page={{ page_object.next_page_number }}" class="page-link">Next</a></li>
+                    <li class="page-item"> <a href="?page={{ page_object.paginator.num_pages }}" class="page-link">{{ page_object.paginator.num_pages }} &raquo; </a></li>
+                {% endif %}
+            </ul>
+        </div>
+        
     </div>
 
 </div>
 
 
-
+<script src={% static 'js/searchExpenses.js' %}></script>
 {% endblock content %}
