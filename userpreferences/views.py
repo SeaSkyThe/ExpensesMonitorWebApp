@@ -14,7 +14,9 @@ def index(request):
     userPreferences_exists = UserPreferences.objects.filter(user = request.user).exists()
     if(userPreferences_exists): # If the user preference exists, we get and change, if not, we create
         user_preferences = UserPreferences.objects.get(user = request.user)
-
+    else:
+        user_preferences = UserPreferences(user=request.user, currency='Brazilian Real - BRL')
+        user_preferences.save()
 
     currencies_data = []
     currencies_path = os.path.join(settings.BASE_DIR, 'Common-Currency.json')
