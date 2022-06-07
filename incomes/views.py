@@ -117,3 +117,15 @@ def delete_income(request, id):
 	income.delete()
 	messages.success(request, 'Income deleted succesfully')
 	return redirect('incomes')
+
+def search_incomes(request):
+	if(request.method == 'POST'):
+		search_string = json.loads(request.body).get('searchText')
+		incomes = Income.objects.filter(amount__startswith=search_string, owner=request.user) | Income.objects.filter(
+			date__startswith=search_string, owner=request.user)	| Income.objects.filter(
+			description__icontains=search_string, owner=request.user) | Income.objects.filter(
+			source__icontains=search_string, owner=request.user) 
+
+		data = incomes.values()
+
+		return JsonResponse(list(data), safe=False)

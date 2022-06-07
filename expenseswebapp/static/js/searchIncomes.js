@@ -12,7 +12,7 @@ searchField.addEventListener('keyup', (e)=>{
     const searchValue = e.target.value;
     if(searchValue.trim().length > 0){
         paginationContainer.style.display = 'none';
-        fetch("/search_incomes/", {
+        fetch("/income/search_income/", {
             body: JSON.stringify({ searchText: searchValue }),
             method: "POST",
         }).then((res) => res.json())
