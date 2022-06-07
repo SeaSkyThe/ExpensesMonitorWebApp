@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+	
+<div class="container mt-4">
+	<div class="row">
+        <div class="col-md-10">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href= {% url 'incomes' %}>Incomes</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Edit Income</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-md-2">
+            <a href={% url 'delete_income' values.id %} class="btn btn-danger btn-sm">Delete</a>
+
+        </div>
+
+    </div>
+    <div class="card">
+        <div class="card-body">
+            <form action={% url 'edit_income' values.id %} method="post">
+                {% csrf_token %}
+                {% include 'partials/messages.html' %}
+                <div class="form-group mb-3">
+                    <label class="form-label">Amount</label>
+                    <input type="number" min="0" step=".01" class="form-control form-control-sm" name="amount" value="{{ values.amount }}">
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Description</label>
+                    <input type="text" class="form-control form-control-sm" name="description" value="{{ values.description }}">
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Source</label>
+                    <select name="source" class="form-select form-control form-control-sm" >
+                        <option selected name="{{ values.source }}" value="{{ values.source }}">{{ values.source }}</option>
+                        {% for source in sources %}
+                            {% if source.name != values.source %}
+                                <option name="{{ source.name }}" value="{{ source.name }}">{{ source.name }}</option>
+                            {% endif %}
+                        {% endfor %}
+                        
+                    </select>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label class="form-label">Income date</label>
+                    <input type="date" class="form-control form-control-sm" name="income_date" value="{{ values.date |date:'Y-m-d' }}">
+                </div>
+                <input type="submit" value="update_income" class="btn btn-primary float-end">
+            </form>
+        </div>
+    </div>
+	
+
+</div>
+
+{% endblock %}
