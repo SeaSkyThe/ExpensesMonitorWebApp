@@ -1,10 +1,4 @@
-.bd-placeholder-img {
-  font-size: 1.125rem;
-  text-anchor: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-}
+@import 'sidebar.css';
 
 @media (min-width: 768px) {
   .bd-placeholder-img-lg {
@@ -66,21 +60,126 @@
   transform: scale(1.1);
 }
 
+
+/* ============== BREADCRUMB CSS ================ */
 .breadcrumb{
-  background-color: lightgray;
+  border-radius: 5px 5px 5px 5px;
+  overflow: hidden;
+  box-shadow: 0 0 20px var(--shadow-color);
+  background-color: var(--primary-color-light);
   padding: 1%;
 }
-.breadcrumb-item{
+.breadcrumb-item {
+  color: var(--text-color);
+  padding-left: 1%;
+}
+.breadcrumb-item a{
+  color: var(--text-color);
   padding-left: 1%;
 }
 
-/* Messages fade out
-.messages {
-  animation: fadeOut 5s forwards;
+/* ============== TABLES CSS ================ */
+
+
+.original-table, .table-output{
+  border-collapse: collapse;
+  margin: 25px 0;
+  margin-bottom: 0;
+  font-size: 1em;
+  min-width: 400px;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 0 20px var(--shadow-color);
+
 }
-@keyframes fadeOut {
-  0% {opacity:1;}
-  100% {opacity:0;}  
-} */
+
+.original-table thead tr, .table-output thead tr{
+  background-color: var(--primary-color);
+  color: white;
+  text-align: left;
+  font-weight: 800;
+}
+
+/* table headers and td */
+.original-table th, .table-output th, .original-table td, .table-output td{
+  padding: 24px 30px;
+}
+
+.original-table td, .table-output td{
+  color: var(--text-color);
+}
+/* table rows */
+.original-table tr, .table-output tr{
+  border-bottom: 1px solid #dddddd;
+  font-weight: 600;
+}
+
+/* linhas pares */
+.original-table tr:nth-of-type(even), .table-output tr:nth-of-type(even){
+  background-color: var(--primary-color-light);
+}
+
+/* Ultima linha */
+.original-table tr:last-of-type, .table-output tr:last-of-type{
+  border-bottom: 2px solid var(--primary-color);
+}
+
+.table{
+  margin: 0;
+}
 
 
+/* ============== PAGINATION CSS ================ */
+
+.pagination-container{
+    padding-top: 10px;
+}
+.pagination-text{
+    color: var(--text-color);
+    width: 50%;
+    padding: 0;
+    
+}
+.pagination{
+    transform: translateY(-30px);
+    float: right;
+    border-radius: 5px 5px 5px 5px;
+    overflow: hidden;
+    box-shadow: 0 0 20px var(--shadow-color);
+    background-color: var(--primary-color-light);
+}
+/* ============== EDIT ICON ================ */
+.edit-icon{
+  height: 100%;
+  width: 100%;
+  font-size: 1.45em;
+  font-weight: 400;
+}
+
+/* ============== ADD BUTTON ICON ================ */
+
+.add-icon{
+  height: 100%;
+  width: 100%;
+  color: var(--primary-color);
+  font-size:3.2em;
+  font-weight: 400; 
+  transform: translateX(-40%) ;
+  filter: drop-shadow(5px 5px 5px var(--shadow-color));
+}
+/* ============== SCROLLBAR ================ */
+::-webkit-scrollbar {
+    width: 0.3em;
+}
+::-webkit-scrollbar-track {
+  background: var(--primary-color);
+  
+}
+::-webkit-scrollbar-thumb {
+  background: #000000;
+  border: .3em solid #000000;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  opacity: 0.5;
+}

@@ -13,7 +13,7 @@ def index(request):
 	sources=Source.objects.all()
 	if(request.method == 'GET'):
 		incomes = Income.objects.filter(owner=request.user).values().order_by('-date')
-		paginator = Paginator(incomes, per_page=5)
+		paginator = Paginator(incomes, per_page=7)
 		page_number = request.GET.get('page')
 		page_object = paginator.get_page(page_number)
 

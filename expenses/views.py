@@ -28,7 +28,7 @@ def index(request):
 	categories=Category.objects.all()
 	if(request.method == 'GET'):
 		expenses = Expense.objects.filter(owner=request.user).values().order_by('-date')
-		paginator = Paginator(expenses, per_page=5)
+		paginator = Paginator(expenses, per_page=7)
 		page_number = request.GET.get('page')
 		page_object = paginator.get_page(page_number)
 

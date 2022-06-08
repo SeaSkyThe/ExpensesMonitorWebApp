@@ -7,8 +7,13 @@
 </head>
 
 
+
+<div class="text">My Expenses</div>
+
+
 <div class="container mt-4">
    <div class="row">
+       
        <div class="col-md-10">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
@@ -18,21 +23,13 @@
             </nav>
        </div>
        <div class="col-md-2">
-            <a class="btn btn-primary btn-sm float-end" href= {% url 'add_expense' %}>Add Expense</a>
+            <a class="float-end" href= {% url 'add_expense' %}><i class='bx bxs-plus-circle add-icon' ></i></a>
        </div>
    </div>
         
     <div class="container">
         {% include 'partials/messages.html' %}
 
-        <div class="row">
-            <div class="col-md-8"></div>
-            <div class="col-md-4">
-                <div class="form-group">
-                    <input type="text" class="form-control" id="searchField" placeholder='Search'>
-                </div>
-            </div>
-        </div>
         <div class="original-table">
             <table class="table table-stripped table-hover">
                 <thead>
@@ -53,7 +50,7 @@
                             <td>{{expense.category}}</td>
                             <td>{{expense.description}}</td>
                             <td>{{expense.date}}</td>
-                            <td><a href={% url 'edit_expense' expense.id %} class="btn btn-primary btn-sm">edit</a></td>
+                            <td><a href={% url 'edit_expense' expense.id %} ><i class='bx bx-edit edit-icon'></i></a></td>
                         </tr>
                     {% endfor %}
                     
@@ -88,11 +85,9 @@
 
 
         <div class="pagination-container">
-
-            <div class="">
-                Showing Page {{ page_object.number }} of {{ page_object.paginator.num_pages }}
-            </div>
-            <ul class="pagination align-right float-end mr-auto" >
+           <p class='pagination-text'>Showing Page {{ page_object.number }} of {{ page_object.paginator.num_pages }}</p> 
+            <ul class="pagination float-end mr-auto" >
+                
                 {% if page_object.has_previous %}
                     <li {% if page_object.number == 1 %} class="page-item active"{% endif %}> <a class="page-link" href="?page=1">&laquo; 1</a> </li>
                     <li class="page-item"> <a class="page-link" href="?page={{ page_object.previous_page_number }}">Previous</a></li>
@@ -105,7 +100,6 @@
         </div>
         
     </div>
-
 </div>
 
 

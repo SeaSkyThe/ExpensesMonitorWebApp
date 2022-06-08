@@ -175,6 +175,4 @@ class ResetPasswordView(View):
 		user.save()
 		messages.success(request, 'Password reseted successfully')
 		
-
-		
 		return redirect('login')

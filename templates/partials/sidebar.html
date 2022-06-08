@@ -1,73 +1,107 @@
 {% load static %}
 
-
-<nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-  <div class="position-sticky pt-3">
-    <ul class="nav flex-column">
-      <li class="nav-item">
-        <a class="nav-link active" aria-current="page" href="#">
-          <span data-feather="home" class="align-text-bottom"></span>
-          Dashboard
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'expenses' %}">
-          <span data-feather="file" class="align-text-bottom"></span>
-          Expenses
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'incomes' %}">
-          <span data-feather="shopping-cart" class="align-text-bottom"></span>
-          Incomes
-        </a>
-      </li>
-          </ul>
+{% comment %} CSS {% endcomment %}
+<link rel="stylesheet" href={% static 'css/sidebar.css' %}>
+{% comment %} Boxicon CSS {% endcomment %}
+<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
 
-    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
-      <span>Summary</span>
-      <a class="link-secondary" href="#" aria-label="Add a new report">
-        <span data-feather="plus-circle" class="align-text-bottom"></span>
-      </a>
-    </h6>
-    <ul class="nav flex-column mb-2">
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="file-text" class="align-text-bottom"></span>
-          Expenses Summary
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="file-text" class="align-text-bottom"></span>
-          Income Summary
-        </a>
-      </li>
-      
-    </ul>
+<nav id="sidebarMenu" class="sidebar close">
+	<header>
+    	<div class="image-text">
+			<span class="image">
+				<img src={% static 'img/logo.svg' %} alt="">
+			</span>
 
+			<div class="text header-text">
+				<span class="name">ExpensesApp</span>
+				<span class="author">By: SeaSkyThe</span>
+			</div>
+    	</div>
+		<i class='bx bx-chevron-right toggle'></i>
+  </header>
 
-    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted text-uppercase">
-      <span>Settings</span>
-      <a class="link-secondary" href="#" aria-label="Add a new report">
-        <span data-feather="plus-circle" class="align-text-bottom"></span>
-      </a>
-    </h6>
-    <ul class="nav flex-column mb-2">
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'userpreferences' %}">
-          <span data-feather="file-text" class="align-text-bottom"></span>
-          General
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <span data-feather="file-text" class="align-text-bottom"></span>
-            Account
-        </a>
-      </li>
-      
-    </ul>
-  </div>
+  	<div class="menu-bar">
+	  <div class="menu">
+			<li class="search-box">
+				<i class='bx bx-search-alt-2 icon' ></i>
+				<input type="search" placeholder="Search...">
+		 	 </li>
+		  	<ul class="menu-links">
+			  	<li class="nav-link">
+					<a href="#">
+						<i class='bx bx-home icon' ></i>
+						<span class="text nav-text">Dashboard</span>
+				  	</a>
+			  	</li>
+				<li class="nav-link">
+					<a href="{% url 'expenses' %}">
+						<i class='bx bx-money icon' ></i>
+						<span class="text nav-text">Expenses</span>
+				  	</a>
+			  	</li>
+				<li class="nav-link">
+					<a href="{% url 'incomes' %}">
+						<i class='bx bx-wallet icon' ></i>
+						<span class="text nav-text">Incomes</span>
+				  	</a>
+			  	</li>
+				<li class="nav-link">
+					<a href="#">
+						<i class='bx bx-bar-chart-alt-2 icon' ></i>
+						<span class="text nav-text">Expenses Summary</span>
+					</a>
+				</li>
+				<li class="nav-link">
+					<a href="#">
+						<i class='bx bx-pie-chart-alt icon' ></i>
+						<span class="text nav-text">Incomes Summary</span>
+					</a>
+				</li>
+				<li class="nav-link">
+					<a href="{% url 'userpreferences' %}">
+						<i class='bx bx-cog icon'></i>
+						<span class="text nav-text">General Preferences</span>
+					</a>
+				</li>
+				<li class="nav-link">
+					<a href="#">
+						<i class='bx bx-cog icon'></i>
+						<span class="text nav-text">Account Preferences</span>
+					</a>
+				</li>
+		  	</ul>
+	  	</div>
+		<div class="bottom-content">
+			<li class="">
+				<form action="{% url 'logout' %}" method="POST">
+					{% csrf_token %}
+					<button>
+						<i class='bx bx-log-out icon'></i>
+						<span class="text nav-text">Logout</span>
+					</button>
+				</form>
+				
+			</li>
+			<li class="mode">
+				<div class="moon-sun">
+					<i class='bx bx-moon icon moon'></i>
+					<i class='bx bx-sun icon sun'></i>		
+				</div>
+				<span class="mode-text text">Dark Mode</span>
+				<div class="toggle-switch">
+					<span class="switch"></span>
+				</div>
+			</li>
+		</div>  
+  	</div>
+
+  
 </nav>
+{% comment %} <section class="home">
+	<div class="text">Expenses</div>
+
+
+</section> {% endcomment %}
+
+<script src="{% static 'js/sidebar.js' %}"></script>
