@@ -4,10 +4,9 @@ import json
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.contrib import auth
-from validate_email import validate_email
 from django.contrib import messages
 from django.core.mail import EmailMessage
-
+from validate_email import validate_email
 # Create your views here.
 
 # Validate the entered email
@@ -22,7 +21,7 @@ class EmailValidationView(View):
 			return JsonResponse({'email_error':  "Emails should be in the format: 'example@domain.com'. Try another one."})
 		# Verify if the email is already taken
 		if(User.objects.filter(email=email).exists()):
-			return JsonResponse({'email_error': 'This email was already taken, choose another one.'}, status=409)
+			return JsonResponse({'email_error': 'This email was already taken, choose another one.', 'status_code': 409}, status=409)
 
 		return JsonResponse({'email_valid': True})
 
@@ -126,4 +125,56 @@ class LogoutView(View):
 	def post(self, request):
 		auth.logout(request)
 		messages.success(request, 'You have been logged out')
+		return redirect('login')
+
+class ResetPasswordView(View):
+	
+
+
+	def get(self, request):
+		return render(request, 'authentication/reset_password.html')
+
+	def post(self, request):
+		context = {
+			'fieldValues': request.POST,
+		}
+
+		email = request.POST['email']
+		username = request.POST['username']
+		password = request.POST['newPassword']
+		password_repeat = request.POST['newPasswordRepeat']
+
+		if(password != password_repeat):
+			messages.error(request, 'Passwords does not match, try again')
+			return render(request, 'authentication/reset_password.html', context)
+
+		if(len(password) < 6):
+			messages.error(request, 'Passwords must have 6 characters or more.')
+			return render(request, 'authentication/reset_password.html', context)
+
+		if(not User.objects.filter(username=username).exists()): # If username does not exists or its empty
+			if(username == ''):
+				messages.error(request, 'Username is a required field')
+			else:
+				messages.error(request, 'This username does not exists in our database, try again')
+			return render(request, 'authentication/reset_password.html', context)
+
+		if(not User.objects.filter(email=email, username=username).exists()):# If email does not match with that username or is empty
+			if(email==''):
+				messages.error(request, 'Email is a required field')
+			else:
+				messages.error(request, 'This email does not exists in our database, or it does not belong to that username, try again')
+			return render(request, 'authentication/reset_password.html', context)
+		
+		
+		# everything ok
+		user = User.objects.get(username=username, email=email)
+		user.username = username
+		user.email = email
+		user.set_password(password)
+		user.save()
+		messages.success(request, 'Password reseted successfully')
+		
+
+		
 		return redirect('login')
