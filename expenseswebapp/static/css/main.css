@@ -165,8 +165,8 @@
   
 }
 ::-webkit-scrollbar-thumb {
-  background: #000000;
-  border: .3em solid #000000;
+  background: var(--primary-color-light);
+  border: .3em solid var(--primary-color-light);;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -342,4 +342,26 @@
   color: #666666;
   background-color: #cccccc;
   cursor: default;
+}
+
+
+/* ============== PREFERENCES PAGE CSS ================ */
+
+.input-group .form-select{
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 0 20px var(--shadow-color);
+  background-color: var(--primary-color-light);
+}
+
+.input-group .button{
+  color: var(--text-color);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 0 20px var(--shadow-color);
+  background-color: var(--primary-color-light);
+}
+
+.input-group .form-select{
+  color: var(--text-color);
 }

@@ -1,11 +1,28 @@
 {% extends 'base.html' %}
 
-{% block content %}
+{% block title %}
+	Currency Settings
+{% endblock %} 
 
- <div class="container">
-    <hr>
-    <h5>Preferred Currency</h5>
-    <hr>
+{% block content %}
+<div class="text">Preferred Currency</div>
+<div class="row">
+       
+  <div class="col-md-10">
+       <nav aria-label="breadcrumb">
+           <ol class="breadcrumb">
+               <li class="breadcrumb-item"><a href= "">Settings</a></li>
+               <li class="breadcrumb-item active" aria-current="page">Preferred Currency</li>
+           </ol>
+       </nav>
+  </div>
+  <div class="col-md-2">
+      
+  </div>
+</div>
+
+
+ <div class="preferences-container">
     {% include 'partials/messages.html' %}
     <form action="{% url 'userpreferences' %}" method="post">
         {% csrf_token %}
@@ -25,7 +42,7 @@
               {% endfor %}
               
             </select>
-            <input class="btn btn-outline-secondary" type="submit" value="Save"/>
+            <input class="btn btn-outline-secondary button" type="submit" value="Save"/>
           </div>
 
     </form>
