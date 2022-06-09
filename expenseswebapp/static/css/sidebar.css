@@ -13,11 +13,14 @@
     --body-color: #E4E9F7;
     --sidebar-color: #FFF;
     --primary-color: #695CFE;
+    --primary-hover: #695cfeb6;
     --primary-color-light: #F6F5FF;
     --toggle-color: #DDD;
     --text-color: #696969;
     --shadow-color: rgba(0, 0, 0, 0.15);
 
+    --delete-button-color: #ff4d4d;
+    --delete-button-color-hover: #ff4d4da6;
     /* Transition */
     --tran-02: all 0.2s ease;
     --tran-03: all 0.3s ease;

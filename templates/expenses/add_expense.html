@@ -1,10 +1,90 @@
 {% extends 'base.html' %}
 
-
+{% load static %}
 
 {% block content %}
 	
+
+
 <div class="container mt-4">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href= {% url 'expenses' %}>Expenses</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Add Expense</li>
+                </ol>
+            </nav>
+            <div class="auth-container edit-expense">
+                <div class="forms">
+                    <div class="form">
+                        <span class="title">Add a new expense</span>
+                        
+                        <form action={% url 'add_expense' %} method="post">
+                            {% csrf_token %}
+                            {% include 'partials/messages.html' %}
+        
+                            <div class="input-field">
+                                <input type="number" min="0" step=".01" placeholder="Price" name="price" class="" value="{{ values.price }}" required>
+                                <i class='bx bx-money icon'></i>
+                            </div>
+                            <div class="input-field">
+                                <input type="text" placeholder="Description" name="description" class="" value="{{ values.description }}" required>
+                                <i class='bx bx-spreadsheet icon'></i>
+                            </div>
+        
+                            <div class="input-field">
+                                <select name="category" class="" >
+                                    <option selected name="{{ values.category }}" value="{{ values.category }}">{{ values.category }}</option>
+                                    {% for category in categories %}
+                                        {% if category.name != values.category %}
+                                            <option name="{{ category.name }}" value="{{ category.name }}">{{ category.name }}</option>
+                                        {% endif %}
+                                    {% endfor %}
+                                    
+                                </select>
+                                <i class='bx bx-category icon' ></i>
+                            </div>
+        
+                            <div class="input-field date">
+                                <input class="date-picker" type="datepicker" class="" name="spending_date" value="{{ values.date |date:'Y-m-d' }}" required>
+                                <i class='bx bx-calendar icon' ></i>
+                            </div>
+        
+                            <div class="input-field button addBtn-area">
+                                <input type="submit" value="Add Expense" class="submitBtn addBtn">
+                            </div>
+        
+                           
+        
+                        </form>
+        
+                        
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        <div class="col-md-1"></div>
+      
+
+    </div>
+    
+    
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="{% static 'js/editExpensesIncomes.js' %}"></script>
+
+
+{% comment %} <div class="container mt-4">
 	<nav aria-label="breadcrumb">
 		<ol class="breadcrumb">
 			<li class="breadcrumb-item"><a href= {% url 'expenses' %}>Expenses</a></li>
@@ -48,6 +128,6 @@
 		</div>
 	
 
-</div>
+</div> {% endcomment %}
 
 {% endblock %}

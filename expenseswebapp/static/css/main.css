@@ -277,7 +277,7 @@
 }
 
 
-/* CHECKBOX REMEMBER ME NOT USING*/
+/* CHECKBOX REMEMBER ME - NOT USING*/
 .form .checkbox-text{
   display: flex;
   justify-content: space-between;
@@ -322,6 +322,7 @@
   color: #fff;
   font-size: 17px;
   font-weight: 500;
+  text-align: center;
   letter-spacing: 1px;
   border-radius: 6px;
   background-color: var(--primary-color);
@@ -330,7 +331,7 @@
 }
 
 .button input:hover{
-  background-color: #695cfeb6;
+  background-color: var(--primary-hover);
 }
 
 .form .signup{
@@ -364,4 +365,72 @@
 
 .input-group .form-select{
   color: var(--text-color);
+}
+
+/* ============== EDIT EXPENSES AND INCOMES PAGES ================ */
+
+/* delete buttons */
+
+.form .update-delete-btn-area{
+  text-align: center;
+}
+.form .button .updateBtn{
+  transform: translateX(-130%);
+  width: 30%;
+}
+
+.form .button .deleteBtn{
+  background-color: var(--delete-button-color);
+  transform: translateX(30%);
+  width: 30%;
+}
+
+.form .button .deleteBtn:hover{
+  background-color: var(--delete-button-color-hover);
+}
+
+.input-field select{
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  padding: 0 35px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  border-radius: 1px;
+  border-bottom: 2px solid #ccc; 
+  border-top: 2px solid transparent;
+  transition: var(--tran-02);
+  -webkit-appearance: none;
+
+  background: url(../img/dropdown-arrow.png) no-repeat right #fff;
+}
+
+.input-field select:is(:focus, :valid){
+  border-bottom-color: var(--primary-color);
+}
+
+.input-field select:is(:focus, :valid) ~ i{
+  color: var(--primary-color);
+}
+
+.input-field select:hover{
+  background-color: var(--primary-color-light);
+  cursor: pointer;
+}
+
+.edit-expense, .edit-income{
+  margin-top: 5%;
+  max-width: none;
+}
+
+
+/* ============== ADD EXPENSES AND INCOMES PAGES ================ */
+.form .addBtn-area{
+  transform: translateX(-15%);
+  text-align: center;
+}
+.form .button .addBtn{
+  
+  width: 30%;
 }
