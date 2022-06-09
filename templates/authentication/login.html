@@ -1,9 +1,69 @@
 {% extends 'base_auth.html' %}
 {% load static %}
 
+{% block title %}
+	Login into Expenses App
+{% endblock %} 
 {% block content %}
 
-<div class="row">
+
+
+
+
+
+<div class="auth-container">
+	<div class="forms">
+		<div class="form login">
+			<span class="title">Login</span>
+			<form action="{% url 'login' %}" method="post">
+			{% csrf_token %}
+			{% include 'partials/messages.html' %}
+			<div class="input-field">
+				<input type="text" placeholder="Username" name="username" id="usernameField" class="" value="{{fieldValues.username}}" required>
+				<i class='bx bx-user icon' ></i>
+			</div>
+			<div class="input-field">
+				<input type="password" placeholder="Password" name="password" id="passwordField" class="" required>
+				<i class='bx bx-lock-alt icon' ></i>
+				<i class='bx bx-low-vision showPasswordToggle'></i>
+			</div>
+			
+			<div class="checkbox-text">
+				<div class="checkbox-content" >
+					<input type="checkbox" id="logCheck">
+					<label for="logCheck" class="text">Remember me</label>
+				</div> 
+				<a href="{% url 'reset_password' %}" class="text">Forgot password?</a>
+			</div>
+
+
+			<div class="input-field button">
+				<input type="submit" value="Login" class="" >
+				
+			</div>
+
+			</form>
+
+			<div class="signup">
+				<span class="text">Don't have an account?
+					<a class="text signup-text" href="{% url 'register' %}">Sign Up</a>
+				</span>
+			</div>
+		</div>
+	</div>
+</div>
+	 
+
+	
+
+
+
+
+
+
+
+
+{% comment %} <div class="row">
 	<div class="col-md-4"></div>
 	<div class="col-md-4">
 		
@@ -12,7 +72,6 @@
 				<div class="card-title py-3">
 					<h4>Login into your account</h4>
 				</div>
-
 				
 				<form action="{% url 'login' %}" method="post">
 					{% csrf_token %}
@@ -22,7 +81,6 @@
 						<input type="text" placeholder="Username" name="username" id="usernameField" class="form-control form-control-sm" value="{{fieldValues.username}}">
 					</div>
 	
-						
 
 					<div class="form-group mb-3">
 						<input type="password" placeholder="Password" name="password" id="passwordField" class="form-control form-control-sm">
@@ -46,7 +104,7 @@
 
 	</div>
 	<div class="col-md-4"></div>
-</div>
+</div>  {% endcomment %}
 
 
 <script src="{% static 'js/login.js' %}"></script>

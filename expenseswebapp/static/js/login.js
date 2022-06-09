@@ -3,12 +3,12 @@ const passwordField = document.querySelector('#passwordField');
 
 
 const handlePasswordToggleInput = (e) => {
-	if(showPasswordToggle.textContent === "SHOW"){
-		showPasswordToggle.textContent = "HIDE";
+	if(passwordField.getAttribute('type') === "password"){
+		// showPasswordToggle.textContent = "HIDE";
 		passwordField.setAttribute('type', 'text');
 	} 
 	else{
-		showPasswordToggle.textContent = "SHOW";
+		// showPasswordToggle.textContent = "SHOW";
 		passwordField.setAttribute('type', 'password');
 	}
 	

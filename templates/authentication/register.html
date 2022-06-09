@@ -3,7 +3,58 @@
 
 {% block content %}
 
-<div class="row">
+<div class="auth-container">
+	<div class="forms">
+		<div class="form login">
+			<span class="title">Register your account</span>
+			<form action="{% url 'register' %}" method="post">
+				{% csrf_token %}
+				{% include 'partials/messages.html' %}
+
+				<div class="input-field">
+					<input type="text" placeholder="Username" name="username" id="usernameField" class="" value="{{fieldValues.username}}" required>
+					<i class='bx bx-user icon' ></i>
+				</div>
+				<!-- Error message of invalid username, do not display naturally -->
+				<div class="usernameFeedbackArea invalid-feedback" style="display:none"></div>
+				<!-- Username sucess area -->
+				<p class="text-sm valid-feedback usernameSuccessOutput"></p>
+
+				<div class="input-field">
+					<input type="email" placeholder="user@email.com" name="email" id="emailField" class="" value="{{fieldValues.email}}" required>
+					<i class='bx bx-envelope' ></i>
+				</div>
+				<!-- Error message of invalid email, do not display naturally -->
+				<div class="emailFeedbackArea invalid-feedback" style="display:none"></div>
+				<!-- Username sucess area -->
+				<p class="text-sm valid-feedback emailSuccessOutput"></p>
+
+
+				<div class="input-field">
+					<input type="password" placeholder="Password" name="password" id="passwordField" class="" required>
+					<i class='bx bx-lock-alt icon' ></i>
+					<i class='bx bx-low-vision showPasswordToggle'></i>
+				</div>
+			
+
+
+				<div class="input-field button">
+					<input type="submit" value="Register" class="submitBtn">
+				</div>
+
+			</form>
+
+			<div class="signup">
+				<span class="text">Already have an account?
+					<a class="text signup-text" href="{% url 'login' %}">Log In</a>
+				</span>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+{% comment %} <div class="row">
 	<div class="col-md-4"></div>
 	<div class="col-md-4">
 		
@@ -51,7 +102,7 @@
 
 	</div>
 	<div class="col-md-4"></div>
-</div>
+</div> {% endcomment %}
 
 
 <script src="{% static 'js/register.js' %}"></script>

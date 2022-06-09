@@ -141,7 +141,7 @@ header .image-text .header-text{
     font-weight: 600;
 }
 
-.header-text .author{
+.header-text .user{
     margin-top: -2px;
 }
 
@@ -196,7 +196,7 @@ body.dark .sidebar.close header .toggle{
 }
 
 
-.sidebar li a, form{
+.sidebar li a,  .sidebar li form{
     height: 100%;
     width: 100%;
     display: flex;

@@ -12,6 +12,7 @@ from .models import UserPreferences
 def index(request):
     user_preferences = None
     userPreferences_exists = UserPreferences.objects.filter(user = request.user).exists()
+    
     if(userPreferences_exists): # If the user preference exists, we get and change, if not, we create
         user_preferences = UserPreferences.objects.get(user = request.user)
     else:
@@ -33,9 +34,8 @@ def index(request):
     if request.method == 'POST':
         
         currency = request.POST['currency']
-
+        
         if(userPreferences_exists):
-            
             if(user_preferences.currency != currency):
                 user_preferences.currency=currency
                 user_preferences.save()

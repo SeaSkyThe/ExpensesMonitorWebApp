@@ -33,6 +33,7 @@ usernameField.addEventListener('keyup', (e) => {
 			//console.log('data ', data);
 			if(data.username_error){ //If returned a user_name error
 				submitBtn.disabled = true;
+				submitBtn
 
 				usernameSuccessOutput.style.display = 'none'; // When an error appears, hide the sucess output message
 
@@ -44,7 +45,7 @@ usernameField.addEventListener('keyup', (e) => {
 			} 
 			else{ // If theres no error, show that is valid
 				if(!emailField.classList.contains('is-invalid')){ //IF the email field is invalid do not remove atribute
-					submitBtn.removeAttribute("disabled");
+					submitBtn.disabled = false;
 				}
 
 				usernameField.classList.remove('is-invalid');
@@ -101,7 +102,7 @@ emailField.addEventListener('keyup', (e) => {
 			}
 			else{ // If theres no error, show thats valid
 				if(!usernameField.classList.contains('is-invalid')){ //IF the username field is invalid do not remove atribute
-					submitBtn.removeAttribute("disabled");
+					submitBtn.disabled = false;
 				}
 				
 
@@ -126,12 +127,12 @@ emailField.addEventListener('keyup', (e) => {
 
 
 const handlePasswordToggleInput = (e) => {
-	if(showPasswordToggle.textContent === "SHOW"){
-		showPasswordToggle.textContent = "HIDE";
+	if(passwordField.getAttribute('type') === "password"){
+		// showPasswordToggle.textContent = "HIDE";
 		passwordField.setAttribute('type', 'text');
 	} 
 	else{
-		showPasswordToggle.textContent = "SHOW";
+		// showPasswordToggle.textContent = "SHOW";
 		passwordField.setAttribute('type', 'password');
 	}
 	

@@ -88,7 +88,7 @@ class RegistrationView(View):
 				# )
 
 				messages.success(request, 'The registration was a sucess!')
-				return render(request, 'authentication/register.html')
+				return redirect('login')
 
 
 		return render(request, 'authentication/register.html')

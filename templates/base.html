@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <title>Expenses {% block title %} 
+    <title>{% block title %} 
 
     {% endblock %} </title>
 
@@ -36,7 +36,7 @@
 
 			<div class="text header-text">
 				<span class="name">ExpensesApp</span>
-				<span class="author">By: SeaSkyThe</span>
+				<span class="user">Welcome {{ request.user }}</span>
 			</div>
     	</div>
 		<i class='bx bx-chevron-right toggle'></i>
@@ -136,7 +136,7 @@
       <div class="row">
         {% comment %} {% include 'partials/sidebar.html'%} {% endcomment %}
 
-        <main class="col-md-9  col-lg-10 px-md-4">
+        <main class="col-md-9 col-lg-10 px-md-4">
           {% block content %}
 
           
