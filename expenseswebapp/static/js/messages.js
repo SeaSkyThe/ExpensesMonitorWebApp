@@ -8,7 +8,7 @@ if(fadeTarget != null){
                 fadeTarget.style.opacity = 1;
             }
             if (fadeTarget.style.opacity > 0) {
-                fadeTarget.style.opacity -= 0.05;
+                fadeTarget.style.opacity -= 0.1;
             } 
             else {
                 fadeTarget.style.display = 'none';

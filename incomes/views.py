@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 import json
 from django.http import JsonResponse
 from userpreferences.models import UserPreferences
+import datetime
 
 # Create your views here.
 @login_required(login_url='/authentication/login')
@@ -129,3 +130,39 @@ def search_incomes(request):
 		data = incomes.values()
 
 		return JsonResponse(list(data), safe=False)
+
+
+
+# Graphs Views
+
+def incomes_source_summary(request):
+	today_date = datetime.date.today()
+	six_months_ago = today_date-datetime.timedelta(days=30*6)
+
+	user_incomes_last_six_months = Income.objects.filter(date__gte=six_months_ago, date__lte=today_date,owner=request.user)
+
+	data_for_graph = {}
+
+	def get_source_from_income(income):
+		return income.source
+
+	source_list = list(set(map(get_source_from_income, user_incomes_last_six_months)))
+
+	def get_income_source_amount(source):
+		total_amount = 0
+		filtered_by_source = user_incomes_last_six_months.filter(source=source)
+
+		for item in filtered_by_source:
+			total_amount = total_amount + item.amount
+
+		return total_amount
+
+	
+	for source in source_list:
+		data_for_graph[source] = get_income_source_amount(source)
+
+	return JsonResponse({'income_source_data': data_for_graph}, safe=False)
+
+
+def incomes_stats_view(request):
+	return render(request, 'incomes/stats.html')

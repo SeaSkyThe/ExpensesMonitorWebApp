@@ -22,6 +22,9 @@
     <link rel="stylesheet" href={% static 'css/sidebar.css' %}>
     <!-- BOXICON CSS -->
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
+	<!-- CHART JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.0/chart.min.js" integrity="sha512-sW/w8s4RWTdFFSduOTGtk4isV1+190E/GghVffMA9XczdJ2MDzSzLEubKAs5h0wzgSJOQTRYyaz73L3d6RtJSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
   </head>
   
 
@@ -68,13 +71,13 @@
 				  	</a>
 			  	</li>
 				<li class="nav-link">
-					<a href="#">
+					<a href="{% url 'expenses_stats' %}">
 						<i class='bx bx-bar-chart-alt-2 icon' ></i>
 						<span class="text nav-text">Expenses Summary</span>
 					</a>
 				</li>
 				<li class="nav-link">
-					<a href="#">
+					<a href="{% url 'incomes_stats' %}">
 						<i class='bx bx-pie-chart-alt icon' ></i>
 						<span class="text nav-text">Incomes Summary</span>
 					</a>
@@ -136,6 +139,7 @@
       <div class="row">
         {% comment %} {% include 'partials/sidebar.html'%} {% endcomment %}
 
+		
         <main class="col-md-9 col-lg-10 px-md-4">
           {% block content %}
 
@@ -150,8 +154,7 @@
     
 
       <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script>
-      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
-
+	  
       <script src="{% static 'js/main.js' %}"></script>
   </body>
 </html>

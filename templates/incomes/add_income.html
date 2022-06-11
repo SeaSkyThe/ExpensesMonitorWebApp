@@ -35,7 +35,7 @@
                             </div>
         
                             <div class="input-field">
-                                <select name="source" class="" >
+                                <select name="source" class="" required>
                                     <option selected name="{{ values.source }}" value="{{ values.source }}">{{ values.source }}</option>
                                     {% for source in sources %}
                                         {% if source.name != values.source %}
